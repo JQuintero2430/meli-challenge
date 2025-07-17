@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -15,8 +16,8 @@ public class ProductController {
 
   private final ProductService productService;
 
-  @GetMapping("{slug}/{id}")
-  public ProductDto getProductBySlugAndId(@PathVariable String slug, @PathVariable Long id) {
-    return productService.getProductBySlugAndId(slug, id);
+  @GetMapping("{slug}")
+  public ProductDto getProductBySlugAndId(@PathVariable String slug, @RequestParam("productId") Long productId) {
+    return productService.getProductBySlugAndId(slug, productId);
   }
 }
