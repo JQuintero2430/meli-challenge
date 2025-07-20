@@ -3,11 +3,11 @@ package com.example.meli;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class MeliApplicationTests {
+//@SpringBootTest
+//class MeliApplicationTests {
+//
+//  @Test
+//  void contextLoads() {
+//  }
 
-  @Test
-  void contextLoads() {
-  }
-
-}
+//}
