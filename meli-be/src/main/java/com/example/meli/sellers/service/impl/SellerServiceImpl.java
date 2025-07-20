@@ -2,8 +2,8 @@ package com.example.meli.sellers.service.impl;
 
 import com.example.meli.sellers.model.dto.SellerDto;
 import com.example.meli.sellers.service.SellerService;
-import com.example.meli.util.exception.AppException;
-import com.example.meli.util.exception.ResourceNotFoundException;
+import com.example.meli.utils.exception.AppException;
+import com.example.meli.utils.exception.ResourceNotFoundException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -14,7 +14,7 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Objects;
 
-import static com.example.meli.util.Constants.SELLER_FILE_PATH;
+import static com.example.meli.utils.Constants.SELLER_FILE_PATH;
 
 @Slf4j
 @Service
