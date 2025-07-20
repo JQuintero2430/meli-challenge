@@ -37,8 +37,6 @@ public class User {
   @Column(nullable = false)
   private String email;
 
-  private String password;
-
   private LocalDateTime createdAt;
 
   private LocalDateTime lastLogin;
