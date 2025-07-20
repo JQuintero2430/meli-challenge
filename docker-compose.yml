@@ -1,6 +1,3 @@
-
-version: "3.8"
-
 services:
   postgres:
     image: postgres:15
@@ -50,6 +47,7 @@ services:
     container_name: meli-frontend
     ports:
       - "4321:4321"
+    command: ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
     networks:
       - meli-net
 
