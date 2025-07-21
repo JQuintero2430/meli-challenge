@@ -1,4 +1,4 @@
-package com.example.meli.products.repository;
+package com.example.meli.products.repository.projections;
 
 import java.math.BigDecimal;
 import java.util.Map;

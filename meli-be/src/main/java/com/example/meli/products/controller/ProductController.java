@@ -16,8 +16,9 @@ public class ProductController {
 
   private final ProductService productService;
 
-  @GetMapping("{slug}")
-  public ProductDto getProductBySlugAndId(@PathVariable String slug, @RequestParam("productId") Long productId) {
-    return productService.getProductBySlugAndId(slug, productId);
+  @GetMapping("/{slug}")
+  public ProductDto getProductBySlugAndId(@PathVariable(required = false) String slug,
+                                          @RequestParam("productId") Long productId) {
+    return productService.getProductById(productId);
   }
 }
