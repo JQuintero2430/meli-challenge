@@ -15,6 +15,7 @@ import java.util.Set;
 public class Category {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(nullable = false, unique = true)
   private Long id;
 
   @Column(nullable = false)

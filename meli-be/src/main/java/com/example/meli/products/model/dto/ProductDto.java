@@ -13,4 +13,7 @@ public record ProductDto(
     String category,
     Map<String, String> attributes
 ) {
+  public ProductDto withAttributes(Map<String, String> newAttributes) {
+    return new ProductDto(id, title, slug, description, price, stock, category, newAttributes);
+  }
 }

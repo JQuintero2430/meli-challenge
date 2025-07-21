@@ -1,5 +1,6 @@
 package com.example.meli.sellers.model.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,6 +15,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 public class Seller {
   @Id
   @GeneratedValue(strategy = IDENTITY)
+  @Column(nullable = false, unique = true)
   private Long id;
   private String nickname;
   private String email;
