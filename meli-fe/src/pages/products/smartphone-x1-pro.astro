@@ -2,8 +2,8 @@
 // src/pages/products/[slug].astro
 export const prerender = false;
 
-const { slug } = Astro.params;
-const { productId } = Astro.url.searchParams;
+const url = new URL(Astro.request.url);
+const productId = url.searchParams.get("productId");
 
 // Fetch product data
 let product = null;
@@ -11,34 +11,28 @@ let seller = null;
 let user = null;
 let error = null;
 
-console.log("slug", slug);
-console.log("productId", productId);
-
 try {
     // Fetch product
-    const productResponse = await fetch(`http://localhost:8080/api/products/smartphone-x1-pro?productId=1`);
+    const productResponse = await fetch(`http://localhost:8080/api/products/smartphone-x1-pro?productId=${productId}`);
     if (!productResponse.ok) throw new Error('Product not found');
     product = await productResponse.json();
-    console.log("product");
 
     // Fetch seller data (assuming sellerId is available from product or context)
     const sellerId = 1; // This should come from your product data or context
-    const sellerResponse = await fetch(`http://localhost:8080/api/seller/1`);
+    const sellerResponse = await fetch(`http://localhost:8080/api/seller/${sellerId}`);
     if (sellerResponse.ok) {
         seller = await sellerResponse.json();
     }
-    console.log("seller");
 
     // Fetch user data (assuming userId is available from session or context)
     const userId = 2; // This should come from your authentication context
-    const userResponse = await fetch(`http://localhost:8080/api/user/2`);
+    const userResponse = await fetch(`http://localhost:8080/api/user/${userId}`);
     if (userResponse.ok) {
         user = await userResponse.json();
     }
-    console.log("user");
 } catch (err) {
     error = err.message;
-    console.log("catch");
+    console.log("catch")
 }
 ---
 
