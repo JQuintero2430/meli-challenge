@@ -11,27 +11,34 @@ let seller = null;
 let user = null;
 let error = null;
 
+console.log("slug", slug);
+console.log("productId", productId);
+
 try {
     // Fetch product
-    const productResponse = await fetch(`http://localhost:8080/api/products/${slug}?productId=${productId}`);
+    const productResponse = await fetch(`http://localhost:8080/api/products/smartphone-x1-pro?productId=1`);
     if (!productResponse.ok) throw new Error('Product not found');
     product = await productResponse.json();
+    console.log("product");
 
     // Fetch seller data (assuming sellerId is available from product or context)
     const sellerId = 1; // This should come from your product data or context
-    const sellerResponse = await fetch(`http://localhost:8080/api/seller/${sellerId}`);
+    const sellerResponse = await fetch(`http://localhost:8080/api/seller/1`);
     if (sellerResponse.ok) {
         seller = await sellerResponse.json();
     }
+    console.log("seller");
 
     // Fetch user data (assuming userId is available from session or context)
     const userId = 2; // This should come from your authentication context
-    const userResponse = await fetch(`http://localhost:8080/api/user/${userId}`);
+    const userResponse = await fetch(`http://localhost:8080/api/user/2`);
     if (userResponse.ok) {
         user = await userResponse.json();
     }
+    console.log("user");
 } catch (err) {
     error = err.message;
+    console.log("catch");
 }
 ---
 
