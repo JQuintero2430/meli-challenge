@@ -2,6 +2,7 @@ package com.example.meli.users.service.impl;
 
 import com.example.meli.paymentmethod.model.dto.PaymentMethodDto;
 import com.example.meli.paymentmethod.model.entity.PaymentMethod;
+import com.example.meli.paymentmethod.model.mapper.PaymentMethodMapper;
 import com.example.meli.users.model.dto.UserDetailsDto;
 import com.example.meli.users.model.mapper.UserMapper;
 import com.example.meli.users.repository.UserRepository;
@@ -28,26 +29,16 @@ import static com.example.meli.utils.Constants.USER_DETAILS_FILE_PATH;
 @RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
   private final UserRepository userRepository;
-  private final UserMapper userMapper;
 
   public UserDetailsDto getUserDetailsByUserId(Long userId) {
     UserDetailsProjection userDetails = userRepository.findUserDetailsById(userId)
         .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
 
-    List<PaymentMethod> paymentMethods = userRepository.findPaymentMethodsByUserId(userId);
+    List<PaymentMethodDto> paymentMethods = userRepository.findPaymentMethodsByUserId(userId)
+        .stream()
+        .map(PaymentMethodMapper.INSTANCE::toDto)
+        .toList();
 
-    return new UserDetailsDto(
-        userDetails.getId(),
-        userDetails.getUsername(),
-        userDetails.getProfileImageUrl(),
-        paymentMethods.stream()
-            .map(pm -> new PaymentMethodDto(
-                pm.getId(),
-                pm.getType(),
-                pm.getCountryCode()
-            ))
-            .collect(Collectors.toList())
-    );
+    return UserMapper.INSTANCE.toDtoWithPaymentMethods(userDetails, paymentMethods);
   }
-
 }

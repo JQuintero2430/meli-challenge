@@ -1,30 +1,30 @@
 -- Script to initialize the database with sample data
 
 -- Insert payment methods if table exists and is empty
-INSERT INTO payment_methods (type, provider, is_active, country_code)
-SELECT 'CREDIT_CARD', 'Visa', true, 'AR'
+INSERT INTO payment_methods (type, provider, is_active, country_code, image_url)
+SELECT 'CREDIT_CARD', 'Visa', true, 'AR', 'https://example.com/images/visa-credit.png'
     WHERE EXISTS (SELECT FROM information_schema.tables WHERE table_name = 'payment_methods')
-  AND (SELECT COUNT(*) FROM payment_methods) = 0;
+    AND (SELECT COUNT(*) FROM payment_methods) = 0;
 
-INSERT INTO payment_methods (type, provider, is_active, country_code)
-SELECT 'CREDIT_CARD', 'Mastercard', true, 'AR'
+INSERT INTO payment_methods (type, provider, is_active, country_code, image_url)
+SELECT 'CREDIT_CARD', 'Mastercard', true, 'AR', 'https://example.com/images/mastercard-credit.png'
     WHERE EXISTS (SELECT FROM information_schema.tables WHERE table_name = 'payment_methods')
-  AND (SELECT COUNT(*) FROM payment_methods) <= 1;
+    AND (SELECT COUNT(*) FROM payment_methods) <= 1;
 
-INSERT INTO payment_methods (type, provider, is_active, country_code)
-SELECT 'DEBIT_CARD', 'Visa', true, 'AR'
+INSERT INTO payment_methods (type, provider, is_active, country_code, image_url)
+SELECT 'DEBIT_CARD', 'Visa', true, 'AR', 'https://example.com/images/visa-debit.png'
     WHERE EXISTS (SELECT FROM information_schema.tables WHERE table_name = 'payment_methods')
-  AND (SELECT COUNT(*) FROM payment_methods) <= 2;
+    AND (SELECT COUNT(*) FROM payment_methods) <= 2;
 
-INSERT INTO payment_methods (type, provider, is_active, country_code)
-SELECT 'DEBIT_CARD', 'Mastercard', true, 'AR'
+INSERT INTO payment_methods (type, provider, is_active, country_code, image_url)
+SELECT 'DEBIT_CARD', 'Mastercard', true, 'AR', 'https://example.com/images/mastercard-debit.png'
     WHERE EXISTS (SELECT FROM information_schema.tables WHERE table_name = 'payment_methods')
-  AND (SELECT COUNT(*) FROM payment_methods) <= 3;
+    AND (SELECT COUNT(*) FROM payment_methods) <= 3;
 
-INSERT INTO payment_methods (type, provider, is_active, country_code)
-SELECT 'MERCADO_PAGO', 'MercadoPago', true, 'AR'
+INSERT INTO payment_methods (type, provider, is_active, country_code, image_url)
+SELECT 'MERCADO_PAGO', 'MercadoPago', true, 'AR', 'https://example.com/images/mercadopago.png'
     WHERE EXISTS (SELECT FROM information_schema.tables WHERE table_name = 'payment_methods')
-  AND (SELECT COUNT(*) FROM payment_methods) <= 4;
+    AND (SELECT COUNT(*) FROM payment_methods) <= 4;
 
 -- Insert users if table exists and is empty
 INSERT INTO users (username, profile_image_url, email, created_at, is_active, country_code)

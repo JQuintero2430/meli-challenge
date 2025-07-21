@@ -29,4 +29,7 @@ public class PaymentMethod {
 
   @Column(nullable = false, length = 2)
   private String countryCode;
+
+  @Column(nullable = false)
+  String imageUrl;
 }

@@ -20,14 +20,19 @@ public interface UserMapper {
   @Mapping(target = "paymentMethodsAvailable", expression = "java(mapAvailablePaymentMethods(projection))")
   UserDetailsDto toDto(UserDetailsProjection projection);
 
+  @Mapping(target = "paymentMethodsAvailable", source = "paymentMethodsAvailable")
+  UserDetailsDto toDtoWithPaymentMethods(UserDetailsProjection projection, List<PaymentMethodDto> paymentMethodsAvailable);
+
   default List<PaymentMethodDto> mapAvailablePaymentMethods(UserDetailsProjection projection) {
     return projection.getPaymentMethods().stream()
         .filter(pm -> pm.getCountryCode().equals(projection.getCountryCode()))
         .filter(PaymentMethod::isActive)
         .map(pm -> new PaymentMethodDto(
             pm.getId(),
+            pm.getProvider(),
+            pm.getCountryCode(),
             pm.getType(),
-            pm.getCountryCode()
+            pm.getImageUrl()
         ))
         .collect(Collectors.toList());
   }
