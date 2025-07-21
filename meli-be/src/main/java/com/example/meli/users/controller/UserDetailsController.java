@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/user-details")
+@RequestMapping("/user")
 public class UserDetailsController {
 
   private final UserDetailsService userDetailsService;
