@@ -82,24 +82,40 @@ SELECT 'ElectroWorld', 'info@electroworld.com', '+0987654321', '456 Electro Ave'
     WHERE EXISTS (SELECT FROM information_schema.tables WHERE table_name = 'seller')
   AND (SELECT COUNT(*) FROM seller) <= 1;
 
+INSERT INTO categories (name, description, created_at, updated_at)
+SELECT 'Teléfonos', 'Dispositivos móviles inteligentes y teléfonos tradicionales.', NOW(), NOW()
+    WHERE EXISTS (SELECT FROM information_schema.tables WHERE table_name = 'categories')
+  AND (SELECT COUNT(*) FROM categories) = 0;
+
+INSERT INTO categories (name, description, created_at, updated_at)
+SELECT 'Computadoras', 'Laptops, PC de escritorio y accesorios relacionados.', NOW(), NOW()
+    WHERE EXISTS (SELECT FROM information_schema.tables WHERE table_name = 'categories')
+  AND (SELECT COUNT(*) FROM categories) <= 1;
+
+INSERT INTO categories (name, description, created_at, updated_at)
+SELECT 'Audio', 'Auriculares, parlantes, equipos de sonido y más.', NOW(), NOW()
+    WHERE EXISTS (SELECT FROM information_schema.tables WHERE table_name = 'categories')
+  AND (SELECT COUNT(*) FROM categories) <= 2;
+
 -- Insert products if table exists and is empty
-INSERT INTO products (title, slug, description, price, stock, category, created_at, updated_at)
+INSERT INTO products (title, slug, description, price, stock, category_id, created_at, updated_at)
 SELECT 'Smartphone X1 Pro', 'smartphone-x1-pro', 'Un potente smartphone con cámara de 108MP y pantalla OLED.',
-       899.99, 50, 'Teléfonos', NOW(), NOW()
+       899.99, 50, 1, NOW(), NOW()
     WHERE EXISTS (SELECT FROM information_schema.tables WHERE table_name = 'products')
   AND (SELECT COUNT(*) FROM products) = 0;
 
-INSERT INTO products (title, slug, description, price, stock, category, created_at, updated_at)
+INSERT INTO products (title, slug, description, price, stock, category_id, created_at, updated_at)
 SELECT 'Laptop UltraBook Z3', 'laptop-ultrabook-z3', 'Laptop ultradelgada con procesador de última generación.',
-       1299.99, 30, 'Computadoras', NOW(), NOW()
+       1299.99, 30, 2, NOW(), NOW()
     WHERE EXISTS (SELECT FROM information_schema.tables WHERE table_name = 'products')
   AND (SELECT COUNT(*) FROM products) <= 1;
 
-INSERT INTO products (title, slug, description, price, stock, category, created_at, updated_at)
+INSERT INTO products (title, slug, description, price, stock, category_id, created_at, updated_at)
 SELECT 'Auriculares Bluetooth Pro', 'auriculares-bluetooth-pro', 'Auriculares con cancelación de ruido y batería de larga duración.',
-       149.99, 100, 'Audio', NOW(), NOW()
+       149.99, 100, 3, NOW(), NOW()
     WHERE EXISTS (SELECT FROM information_schema.tables WHERE table_name = 'products')
   AND (SELECT COUNT(*) FROM products) <= 2;
+
 
 -- Insert product attributes if table exists and is empty
 INSERT INTO product_attributes (product_id, attr_key, attr_value)

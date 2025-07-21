@@ -1,5 +1,6 @@
 package com.example.meli.products.model.entity;
 
+import com.example.meli.categories.model.entity.Category;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -35,8 +36,10 @@ public class Product {
   @Column(nullable = false)
   private Integer stock;
 
-  @Column(nullable = false)
-  private String category;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "category_id", nullable = false)
+  private Category category;
+
 
   @OneToMany(
       mappedBy = "product",
