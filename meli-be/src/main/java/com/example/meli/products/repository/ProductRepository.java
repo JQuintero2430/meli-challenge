@@ -17,14 +17,13 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
   @Query("""
     SELECT p.id AS id, p.title AS title, p.slug AS slug,
     p.description AS description, p.price AS price,
-    p.stock AS stock, c.name AS category,
-    FROM Product p 
+    p.stock AS stock, c.name AS category
+    FROM Product p
     JOIN Category c ON p.category.id = c.id
     WHERE p.id = :productId""")
   Optional<ProductProjection> findProjectionById(@Param("productId") Long productId);
 
   @Query("SELECT pa FROM ProductAttribute pa WHERE pa.product.id = :productId")
   List<ProductAttribute> findAttributesByProductId(@Param("productId") Long productId);
-
 
 }
