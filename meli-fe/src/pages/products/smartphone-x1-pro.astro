@@ -2,8 +2,7 @@
 // src/pages/products/[slug].astro
 export const prerender = false;
 
-const url = new URL(Astro.request.url);
-const productId = url.searchParams.get("productId");
+const API_URL = import.meta.env.PUBLIC_API_URL;
 
 // Fetch product data
 let product = null;
@@ -13,20 +12,21 @@ let error = null;
 
 try {
     // Fetch product
-    const productResponse = await fetch(`http://localhost:8080/api/products/smartphone-x1-pro?productId=${productId}`);
+    const productId = 1;
+    const productResponse = await fetch(`${API_URL}/api/products/smartphone-x1-pro?productId=${productId}`);
     if (!productResponse.ok) throw new Error('Product not found');
     product = await productResponse.json();
 
-    // Fetch seller data (assuming sellerId is available from product or context)
-    const sellerId = 1; // This should come from your product data or context
-    const sellerResponse = await fetch(`http://localhost:8080/api/seller/${sellerId}`);
+    // Fetch seller data
+    const sellerId = 1;
+    const sellerResponse = await fetch(`${API_URL}/api/seller/${sellerId}`);
     if (sellerResponse.ok) {
         seller = await sellerResponse.json();
     }
 
-    // Fetch user data (assuming userId is available from session or context)
+    // Fetch user data
     const userId = 2; // This should come from your authentication context
-    const userResponse = await fetch(`http://localhost:8080/api/user/${userId}`);
+    const userResponse = await fetch(`${API_URL}/api/user/${userId}`);
     if (userResponse.ok) {
         user = await userResponse.json();
     }
