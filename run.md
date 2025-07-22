@@ -1,0 +1,4 @@
+Para poder ejecutar el programa es necesario que el usuario cuente con Docker Engine en su entorno de ejecución ya que la ejecución se realiza a través de docker compose.
+Teniendo esto cubierto, es necesario que se ejecute el comando `git clone https://github.com/JQuintero2430/meli-challenge.git` desde la terminal de tu pc, descargando el repositorio para la ejecucion.
+Posteriormente, desde la terminal que estas ejecutando navega hasta la raiz del proyecto, el cual es un monorrepo y ejecuta el comando `docker compose up --build`.
+Deberas esperar un momento hasta que los contenedores este corriendo, esto podras identificarlo ya que en la terminal donde ejecutes el comando mencionado en el punto anterior veras la frase "-> Inicialización de datos completada exitosamente."; podras observar el desarrollo ingresando a la ulr `localhost:4321` desde cualquier navegador.
