@@ -1,11 +1,61 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import { Button } from '@components/Button.astro'; // Opcional si usas componentes separados
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mercado Libre Challenge</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        text-align: center;
+      }
+
+      h1 {
+        color: #333;
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+
+      p {
+        color: #666;
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+      }
+
+      .start-button {
+        background-color: #3483fa;
+        color: white;
+        border: none;
+        padding: 1rem 2rem;
+        font-size: 1.2rem;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        text-decoration: none;
+      }
+
+      .start-button:hover {
+        background-color: #2968c8;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Mercado Libre Challenge</h1>
+    <p>Haz clic aquí</p>
+    <a
+      href="http://localhost:4321/products/smartphone-x1-pro?productId=1"
+      class="start-button"
+    >
+      Empezar
+    </a>
+  </body>
+</html>
