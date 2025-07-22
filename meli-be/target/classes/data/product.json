@@ -1,0 +1,15 @@
+{
+  "id": 12345,
+  "title": "Smartphone X1 Pro",
+  "slug": "smartphone-x1-pro",
+  "description": "Un potente smartphone con cámara de 108MP y pantalla OLED.",
+  "price": 899.99,
+  "stock": 50,
+  "category": "Teléfonos",
+  "attributes": {
+    "color": "Negro Cósmico",
+    "memoria_ram": "8GB",
+    "almacenamiento": "256GB",
+    "sistema_operativo": "Android 14"
+  }
+}
