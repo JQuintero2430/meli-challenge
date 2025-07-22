@@ -11,17 +11,16 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -39,7 +38,7 @@ class ProductServiceImplTest {
   void getProductById_shouldReturnProductDto_whenProductExists() {
     Long productId = 1L;
 
-    ProductProjection projection = Mockito.mock(ProductProjection.class);
+    ProductProjection projection = mock(ProductProjection.class);
 
     List<ProductAttribute> attributes = new ArrayList<>();
 
@@ -52,7 +51,7 @@ class ProductServiceImplTest {
     attr2.setValue("128GB");
     attributes.add(attr2);
 
-    try (MockedStatic<ProductMapper> mapperMockedStatic = Mockito.mockStatic(ProductMapper.class)) {
+    try (MockedStatic<ProductMapper> mapperMockedStatic = mockStatic(ProductMapper.class)) {
 
       when(productRepository.findProjectionById(productId)).thenReturn(Optional.of(projection));
       when(productRepository.findAttributesByProductId(productId)).thenReturn(attributes);
