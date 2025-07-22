@@ -466,12 +466,12 @@ try {
                             <div class="product-main">
                                 <div class="product-images">
                                     <div class="thumbnails">
-                                        <img src="/placeholder.svg?height=64&width=64" alt="Thumbnail 1" class="thumbnail active">
-                                        <img src="/placeholder.svg?height=64&width=64" alt="Thumbnail 2" class="thumbnail">
-                                        <img src="/placeholder.svg?height=64&width=64" alt="Thumbnail 3" class="thumbnail">
-                                        <img src="/placeholder.svg?height=64&width=64" alt="Thumbnail 4" class="thumbnail">
+                                        <img src="/images/img_3.png?height=64&width=64" alt="Thumbnail 1" class="thumbnail active">
+                                        <img src="/images/img_2.png?height=64&width=64" alt="Thumbnail 2" class="thumbnail">
+                                        <img src="/images/img_1.png?height=64&width=64" alt="Thumbnail 3" class="thumbnail">
+                                        <img src="/images/img.png?height=64&width=64" alt="Thumbnail 4" class="thumbnail">
                                     </div>
-                                    <img src="/placeholder.svg?height=400&width=500" alt={product.title} class="main-image">
+                                    <img src="/images/img_3.png?height=400&width=500" alt={product.title} class="main-image">
                                 </div>
 
                                 <div class="product-info">
@@ -522,7 +522,7 @@ try {
                                 {seller && (
                                         <div class="seller-info">
                                             <div class="seller-header">
-                                                <img src={seller.imageUrl || "/placeholder.svg"} alt={seller.nickname} class="seller-avatar">
+                                                <img src={"/images/img_5.png"} alt={seller.nickname} class="seller-avatar">
                                                 <a href={`/seller/${seller.id}`} class="seller-name">{seller.nickname}</a>
                                             </div>
 
@@ -549,7 +549,7 @@ try {
                                             <div class="payment-list">
                                                 {user.paymentMethodsAvailable.map((method) => (
                                                         <div class="payment-method">
-                                                            <img src={method.imageUrl || "/placeholder.svg"} alt={method.provider} class="payment-icon">
+                                                            <img src={"/images/img_4.png"} alt={method.provider} class="payment-icon">
                                                             <span>{method.provider} {method.type.replace('_', ' ')}</span>
                                                         </div>
                                                 ))}
@@ -574,22 +574,38 @@ try {
                     document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
                     thumb.classList.add('active');
 
-                    const mainImage = document.querySelector('.main-image');
-                    const queries = ['smartphone-main', 'smartphone-back', 'smartphone-side', 'smartphone-box'];
-                    mainImage.src = `/placeholder.svg?height=400&width=500&query=${queries[index]}`;
+                    const mainImage = document.querySelector('.main-image') as HTMLImageElement;
+                    if (!mainImage) return;
+
+                    const imageUrls = [
+                        '/images/img_3.png',
+                        '/images/img_2.png',
+                        '/images/img_1.png',
+                        '/images/img.png'
+                    ];
+
+                    mainImage.src = imageUrls[index];
                 });
             });
 
+
             // Quantity selector validation
-            const quantityInput = document.querySelector('.quantity-input');
+            const quantityInput = document.querySelector('.quantity-input') as HTMLInputElement;
             if (quantityInput) {
                 quantityInput.addEventListener('change', (e) => {
-                    const value = parseInt(e.target.value);
-                    const max = parseInt(e.target.max);
-                    const min = parseInt(e.target.min);
+                    const input = e.target as HTMLInputElement;
+                    if (!input) return;
 
-                    if (value > max) e.target.value = max;
-                    if (value < min) e.target.value = min;
+                    const value = parseInt(input.value) || 0;
+                    const max = parseInt(input.max) || 100;
+                    const min = parseInt(input.min) || 1;
+
+                    // Validar y ajustar el valor
+                    if (value > max) {
+                        input.value = max.toString();
+                    } else if (value < min) {
+                        input.value = min.toString();
+                    }
                 });
             }
         </script>
